@@ -14,9 +14,17 @@ public class SpawnManagerX : MonoBehaviour
     public int enemyCount;
     public int waveCount = 1;
 
+    public GameObject player;
 
-    public GameObject player; 
+    private EnemyX enemyXScript;
+    private float enemyAcceleration = 0.1f;
 
+    private void Start()
+    {
+        enemyXScript = enemyPrefab.GetComponent<EnemyX>();
+        //reset speed of enemy to zero;
+        enemyXScript.speed = 0;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -24,6 +32,8 @@ public class SpawnManagerX : MonoBehaviour
 
         if (enemyCount == 0)
         {
+            // Increment speed by enemyAceleration each wave
+            enemyXScript.speed += enemyAcceleration;
             SpawnEnemyWave(waveCount);
         }
 
